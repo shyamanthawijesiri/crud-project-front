@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {  HttpClient } from '@angular/common/http';
 import { Observable  } from 'rxjs';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
+// import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/toPromise';
 
 import { Employee } from './employee.model';
 
@@ -10,10 +10,15 @@ import { Employee } from './employee.model';
   providedIn: 'root'
 })
 export class EmployeeService {
-  // selectedEmployee: Employee;
-  // employees: Employee[];
-  constructor(
-    selectedEmployee: Employee,
+  selectedEmployee : Employee;
+  employee: Employee[];
+  baseUrl = 'http://localhost:3000/employees';
 
-  ) {}
+  constructor(
+    private http: HttpClient,
+    ) {}
+
+    postEmployee(emp: Employee){
+      return this.http.post(this.baseUrl,emp)
+    }
 }
