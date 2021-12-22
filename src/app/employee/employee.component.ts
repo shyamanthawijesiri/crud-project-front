@@ -14,23 +14,24 @@ export class EmployeeComponent implements OnInit {
   position: string;
   office: string;
   salary: number;
-
+  allEmp:any;
   constructor(private employeeService: EmployeeService) { }
 
   ngOnInit(): void {
+    this.refreshEmployeeList();
   }
 
   resetForm(form?:NgForm){
     if(form)
       form.reset();
-    this.employeeService.selectedEmployee ={
-      _id:"",
-      name: "",
-      position: "",
-      office: "",
-      salary:0
+    // this.employeeService.selectedEmployee ={
+    //   _id:"",
+    //   name: "",
+    //   position: "",
+    //   office: "",
+    //   salary:0
 
-    }
+    // }
   }
 
   onSubmit(form:NgForm){
@@ -38,6 +39,14 @@ export class EmployeeComponent implements OnInit {
       this.resetForm(form);
       console.log('successfully enter employee')
     });
+  }
+
+  refreshEmployeeList(){
+    this.employeeService.getEmployeeList().subscribe((res)=>{
+      this.allEmp = res;
+      console.log(res);
+    })
+
   }
   // onSubmit(f: NgForm) {
   //   console.log(f.value);  // { first: '', last: '' }

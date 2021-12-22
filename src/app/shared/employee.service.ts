@@ -19,6 +19,10 @@ export class EmployeeService {
     ) {}
 
     postEmployee(emp: Employee){
-      return this.http.post(this.baseUrl,emp)
+      return this.http.post(this.baseUrl,emp);
+    }
+
+    getEmployeeList(){
+      return this.http.get(this.baseUrl);
     }
 }
