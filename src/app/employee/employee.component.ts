@@ -36,8 +36,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   onSubmit(form:NgForm){
-    console.log('form value');
-    console.log(form.value._id);
+
     if(form.value._id==""){
 
       this.employeeService.postEmployee(form.value).subscribe((res)=>{
@@ -69,6 +68,14 @@ export class EmployeeComponent implements OnInit {
     this.position = emp.position;
     this.office = emp.office;
     this.salary = emp.salary
+  }
+
+  onDelete(id:string, form:NgForm){
+    this.employeeService.deleteEmployee(id).subscribe((res)=>{
+      this.refreshEmployeeList();
+      this.resetForm(form);
+      console.log('delete successfully')
+    })
   }
   // onSubmit(f: NgForm) {
   //   console.log(f.value);  // { first: '', last: '' }

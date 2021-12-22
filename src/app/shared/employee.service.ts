@@ -27,8 +27,12 @@ export class EmployeeService {
     }
 
     putEmployee(emp: Employee){
-      console.log('put request');
-      console.log(emp)
       return this.http.put(this.baseUrl+`/${emp._id}`,emp);
     }
+
+    deleteEmployee(id:string){
+      return this.http.delete(this.baseUrl+`/${id}`);
+    }
+
+
 }
