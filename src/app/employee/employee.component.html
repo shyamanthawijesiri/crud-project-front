@@ -68,6 +68,14 @@
                  <td>{{emp.name}}</td>
                  <td>{{emp.position}}</td>
                  <td>{{emp.salary}}</td>
+                 <td>
+                   <a class="action-btn" (click)="onEdit(emp)">
+                     <i class="material-icons">edit</i>
+                   </a>
+                   <a  class="action-btn">
+                     <i class="material-icons">delete</i>
+                   </a>
+                 </td>
 
                </tr>
              </table>

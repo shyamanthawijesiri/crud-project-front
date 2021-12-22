@@ -25,4 +25,10 @@ export class EmployeeService {
     getEmployeeList(){
       return this.http.get(this.baseUrl);
     }
+
+    putEmployee(emp: Employee){
+      console.log('put request');
+      console.log(emp)
+      return this.http.put(this.baseUrl+`/${emp._id}`,emp);
+    }
 }

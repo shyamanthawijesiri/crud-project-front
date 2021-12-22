@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../shared/employee.service';
 import {NgForm} from '@angular/forms';
+import { Employee } from '../shared/employee.model';
 
 @Component({
   selector: 'app-employee',
@@ -35,10 +36,23 @@ export class EmployeeComponent implements OnInit {
   }
 
   onSubmit(form:NgForm){
-    this.employeeService.postEmployee(form.value).subscribe((res)=>{
-      this.resetForm(form);
-      console.log('successfully enter employee')
-    });
+    console.log('form value');
+    console.log(form.value._id);
+    if(form.value._id==""){
+
+      this.employeeService.postEmployee(form.value).subscribe((res)=>{
+        this.resetForm(form);
+        this.refreshEmployeeList();
+        console.log('successfully enter employee')
+      });
+    }else{
+
+      this.employeeService.putEmployee(form.value).subscribe((res)=>{
+        this.resetForm(form);
+        this.refreshEmployeeList();
+        console.log('successfully update employee')
+      });
+    }
   }
 
   refreshEmployeeList(){
@@ -47,6 +61,14 @@ export class EmployeeComponent implements OnInit {
       console.log(res);
     })
 
+  }
+  onEdit(emp: Employee){
+    console.log(emp._id);
+    this._id= emp._id;
+    this.name = emp.name;
+    this.position = emp.position;
+    this.office = emp.office;
+    this.salary = emp.salary
   }
   // onSubmit(f: NgForm) {
   //   console.log(f.value);  // { first: '', last: '' }
